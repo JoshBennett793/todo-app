@@ -1,42 +1,12 @@
-class Pubsub {
-  constructor() {
-    this.tracker = {
-      // key: eventname, value: [ funcs ]
-    };
-  }
-
-  subscribe(eventname, func) {
-    if (this.tracker[eventname]) {
-      this.tracker[eventname].push(func);
-    } else {
-      this.tracker[eventname] = [func];
-    }
-    return {
-      unsubscribe: () => {
-        const funcs = this.tracker[eventname];
-        const idx = funcs.indexOf(func);
-        if (idx > -1) {
-          funcs.splice(idx, 1);
-        }
-      },
-    };
-  }
-
-  publish(eventname, ...args) {
-    const funcs = this.tracker[eventname];
-    if (Array.isArray(funcs)) {
-      funcs.forEach((func) => {
-        func.apply(null, args);
-      });
-    }
-  }
-}
+import Pubsub from "./components/pubsub.js";
+import Model from "./components/model.js";
+import View from "./components/view.js";
+import Controller from "./components/controller.js";
 
 const pubsub = new Pubsub();
 
 class Todo {
-  constructor(id, project, title, content, dueDate, priority) {
-    this.id = id;
+  constructor(project, title, content, dueDate, priority) {
     this.project = project;
     this.title = title;
     this.content = content;
@@ -45,93 +15,39 @@ class Todo {
   }
 }
 
-class Model {
-  constructor() {
-    this.projects = [];
-    this.todos = [
-      {
-        id: 1,
-        project: "TOP",
-        completed: false,
-        title: "Project 1",
-        content: "Build Model",
-        dueDate: "10-13-2022",
-        priority: "high",
-      },
-      {
-        id: 2,
-        project: "TOP",
-        completed: false,
-        title: "Project 2",
-        content: "Build Controller",
-        dueDate: "10-13-2022",
-        priority: "high",
-      },
-    ];
-    this.notes = [];
+class Note {
+  constructor(title, content) {
+    this.title = title;
+    this.content = content;
   }
-
-  addToTodos = (obj) => {
-    const todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-      project: obj.project,
-      completed: false,
-      title: obj.title,
-      content: obj.content,
-      dueDate: obj.dueDate,
-      priority: obj.priority,
-    };
-    this.todos.push(todo);
-  };
-
-  removeFromTodos = (id) => {
-    this.todos = this.todos.filter((todo) => todo.id != id);
-  };
-
-  updateTodoIDs = () => {
-    for (let todo of this.todos) {
-      todo.id = todo.id - 1;
-    }
-  };
-
-  editTodo = (id, title, content, priority) => {
-    const todo = this.todos.find((todo) => todo.id === id);
-    todo.title = title ? title : todo.title;
-    todo.content = content ? content : todo.content;
-    todo.priority = priority ? priority : todo.priority;
-  };
 }
 
-class View {
-  constructor() {}
-}
-
-class TodoController {
-  constructor(model, view) {
-    this.model = model;
-    this.view = view;
-  }
-
-  createTodo = (todo) => {
-    pubsub.publish("createTodo", todo);
-  };
-
-  editTodo = (id, title, content, priority) => {
-    pubsub.publish("editTodo", id, title, content, priority);
-  };
-
-  removeTodo = (id) => {
-    pubsub.publish("removeTodo", id);
-  };
-
-  updateIDs = () => {
-    pubsub.publish("updateIDs");
-  };
-}
-
-const controller = new TodoController(new Model(), new View());
+const controller = new Controller(new Model(), new View());
 
 pubsub.subscribe("createTodo", controller.model.addToTodos);
 pubsub.subscribe("editTodo", controller.model.editTodo);
 pubsub.subscribe("removeTodo", controller.model.removeFromTodos);
-pubsub.subscribe("updateIDs", controller.model.updateTodoIDs);
+pubsub.subscribe("updateTodoIDs", controller.model.updateTodoIDs);
+pubsub.subscribe("createNote", controller.model.addToNotes);
+pubsub.subscribe("editNote", controller.model.editNote);
+pubsub.subscribe("removeNote", controller.model.removeNote);
+pubsub.subscribe("updateNoteIDs", controller.model.updateNoteIDs);
+
+const note1 = new Note("New Note", "My first note");
+
+const obj1 = new Todo(
+  "work",
+  "Get work done",
+  "Have to do it by 10pm",
+  "10/15/2022",
+  "medium"
+);
+
+controller.createTodo(obj1);
+controller.editTodo(3, "Edited title");
+controller.createNote(note1);
+
+console.log(controller.model.notes);
+console.log(controller.model.todos);
+
+export { pubsub };
