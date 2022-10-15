@@ -2,6 +2,7 @@ import Pubsub from "./components/pubsub.js";
 import Model from "./components/model.js";
 import View from "./components/view.js";
 import Controller from "./components/controller.js";
+import { taskModal } from "./components/modal.js";
 
 import "./css/index.css";
 import "./css/modal.css";
@@ -9,8 +10,8 @@ import "./css/modal.css";
 export const pubsub = new Pubsub();
 
 export class HTMLElement {
-	constructor(tag, type, name, id, __class, text) {
-		const el = document.createElement(tag);
+  constructor(tag, type, name, id, __class, text) {
+    const el = document.createElement(tag);
     if (type) {
       el.type = type;
     }
@@ -26,7 +27,7 @@ export class HTMLElement {
     if (text) {
       el.textContent = text;
     }
-		return el;
+    return el;
   }
 }
 
@@ -58,6 +59,7 @@ pubsub.subscribe("editNote", controller.model.editNote);
 pubsub.subscribe("removeNote", controller.model.removeNote);
 pubsub.subscribe("updateNoteIDs", controller.model.updateNoteIDs);
 pubsub.subscribe("renderTaskModal", controller.view.renderTaskModal);
+pubsub.subscribe("removeTaskModal", controller.view.removeTaskModal);
 
 const note1 = new Note("New Note", "My first note");
 
@@ -78,4 +80,13 @@ console.log(controller.model.todos);
 
 const addTaskBtn = document.querySelector("#add-task-btn");
 
-addTaskBtn.onclick = controller.renderTaskModal();
+addTaskBtn.addEventListener("click", () => {
+  const task = new taskModal();
+  controller.renderTaskModal(task);
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.id == "cancel-btn") {
+    controller.removeTaskModal(e.target.closest("#task-modal-container"));
+  }
+});

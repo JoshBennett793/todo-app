@@ -38,7 +38,11 @@ export default class Controller {
 		pubsub.publish("updateNoteIDs");
 	}
 
-	renderTaskModal = () => {
-		pubsub.publish("renderTaskModal");
+	renderTaskModal = modal => {
+		pubsub.publish("renderTaskModal", modal);
+	}
+
+	removeTaskModal = modal => {
+		pubsub.publish("removeTaskModal", modal);
 	}
 }
