@@ -6,7 +6,7 @@ export default class Controller {
     this.view = view;
   }
 
-  createTodo = (todo) => {
+  createTodo = todo => {
     pubsub.publish("createTodo", todo);
   };
 
@@ -14,7 +14,7 @@ export default class Controller {
     pubsub.publish("editTodo", id, title, content, priority);
   };
 
-  removeTodo = (id) => {
+  removeTodo = id => {
     pubsub.publish("removeTodo", id);
   };
 
@@ -22,7 +22,7 @@ export default class Controller {
     pubsub.publish("updateTodoIDs");
   };
 
-  createNote = (note) => {
+  createNote = note => {
     pubsub.publish("createNote", note);
   };
 
@@ -30,11 +30,15 @@ export default class Controller {
     pubsub.publish("editNote", id, title, content);
   };
 
-	removeNote = (id) => {
+	removeNote = id => {
 		pubsub.publish("removeNote", id);
 	}
 
 	updateNoteIDs = () => {
 		pubsub.publish("updateNoteIDs");
+	}
+
+	renderTaskModal = () => {
+		pubsub.publish("renderTaskModal");
 	}
 }

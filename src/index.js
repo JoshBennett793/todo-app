@@ -3,7 +3,32 @@ import Model from "./components/model.js";
 import View from "./components/view.js";
 import Controller from "./components/controller.js";
 
-const pubsub = new Pubsub();
+import "./css/index.css";
+import "./css/modal.css";
+
+export const pubsub = new Pubsub();
+
+export class HTMLElement {
+	constructor(tag, type, name, id, __class, text) {
+		const el = document.createElement(tag);
+    if (type) {
+      el.type = type;
+    }
+    if (name) {
+      el.name = name;
+    }
+    if (id) {
+      el.id = id;
+    }
+    if (__class) {
+      el.className = __class;
+    }
+    if (text) {
+      el.textContent = text;
+    }
+		return el;
+  }
+}
 
 class Todo {
   constructor(project, title, content, dueDate, priority) {
@@ -32,6 +57,7 @@ pubsub.subscribe("createNote", controller.model.addToNotes);
 pubsub.subscribe("editNote", controller.model.editNote);
 pubsub.subscribe("removeNote", controller.model.removeNote);
 pubsub.subscribe("updateNoteIDs", controller.model.updateNoteIDs);
+pubsub.subscribe("renderTaskModal", controller.view.renderTaskModal);
 
 const note1 = new Note("New Note", "My first note");
 
@@ -50,4 +76,6 @@ controller.createNote(note1);
 console.log(controller.model.notes);
 console.log(controller.model.todos);
 
-export { pubsub };
+const addTaskBtn = document.querySelector("#add-task-btn");
+
+addTaskBtn.onclick = controller.renderTaskModal();

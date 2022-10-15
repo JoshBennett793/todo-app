@@ -1,0 +1,133 @@
+:root {
+  --modal-container-width: min(600px, 80%);
+  --modal-container-height: 200px;
+  --modal-border-radius: 10px;
+  --modal-btn-border-radius: 6px;
+	--invisible-border: rgba(0, 0, 0, 0.0);
+}
+
+#task-modal-container {
+  border-radius: var(--modal-border-radius);
+  width: var(--modal-container-width);
+  height: var(--modal-container-height);
+  padding: 10px 20px 20px;
+
+  position: absolute;
+  top: 100px;
+  left: calc(50% - var(--modal-container-width) / 2);
+
+  box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.75);
+}
+
+#task-form {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#task-input-container {
+  width: 100%;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+#task-title-input,
+#task-description-input {
+	background-color: white;
+  outline: none;
+  border: var(--invisible-border);
+	border-radius: var(--modal-border-radius);
+}
+
+#task-title-input {
+	height: 30px;
+	font-size: 1.1rem;
+}
+
+#task-description-input {
+	height: 50px;
+	border: none;
+	outline: none;
+	resize: none;
+	padding-top: 10px;
+}
+
+#date-input {
+  width: 120px;
+  height: 30px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: var(--modal-btn-border-radius);
+  margin-top: 10px;
+	cursor: pointer;
+}
+
+#date-input:hover {
+	background-color: rgba(0, 0, 0, 0.15);
+}
+
+.date-text-input {
+	padding-left: 34px;
+	padding-bottom: 2px;
+}
+
+.date-input {
+	padding-left: 4px;
+}
+
+#due-date-container {
+	width: 100%;
+	position: relative;
+	margin-right: auto;
+}
+
+#due-date-container:before {
+	content: "";
+	width: 22px;
+	height: 22px;
+	background: url(/src/assets/calendar.svg) no-repeat center;
+	position: absolute;
+	top: 14px;
+	left: 5px;
+}
+
+#due-date-container:focus-within:before {
+	display: none;
+}
+
+#task-modal-bottom-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+	align-items: center;
+  gap: 20px;
+}
+
+.feather-flag {
+	cursor: pointer;
+}
+
+#task-modal-bottom-container button {
+	width: 80px;
+  height: 32px;
+	border: var(--invisible-border);
+  border-radius: var(--modal-btn-border-radius);
+  cursor: pointer;
+}
+
+button#cancel-btn {
+	margin-left: auto;
+}
+
+button#add-btn {
+  color: white;
+  background-color: var(--light-green);
+}
+
+button#add-btn:hover {
+  background-color: var(--green);
+}
