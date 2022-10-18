@@ -13,8 +13,8 @@
         <button id="navbar-toggle" class="header-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="32"
+            height="32"
             viewBox="0 0 24 24"
             fill="none"
             stroke="white"
@@ -31,8 +31,8 @@
         <button id="home-btn" class="header-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="28"
+            height="28"
             viewBox="0 0 24 24"
             fill="none"
             stroke="white"
@@ -46,11 +46,11 @@
           </svg>
         </button>
         <div id="search-input-wrapper">
-				<input type="text" name="search" id="search" placeholder="Search" />
+          <input type="text" name="search" id="search" placeholder="Search" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="white"
@@ -67,8 +67,8 @@
       <button id="add-task-btn" class="header-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="26"
+          height="26"
           viewBox="0 0 24 24"
           fill="none"
           stroke="white"
@@ -82,6 +82,32 @@
         </svg>
       </button>
     </header>
-    <div id="list-navbar"></div>
+    <main id="body-container">
+      <div id="project-navbar">
+        <ul id="top-menu">
+          <li id="all-tasks-nav" class="top-menu-items">All</li>
+
+          <li id="today-tasks-nav" class="top-menu-items">Today</li>
+          <li id="upcoming-tasks-nav" class="top-menu-items">Upcoming</li>
+        </ul>
+        <div id="projects-menu-header">
+          <span id="projects">Projects</span>
+          <button>
+            <img src="../src/assets/plus.svg" alt="Add" />
+          </button>
+          <button>
+						<img src="../src/assets/chevron-down.svg" alt="Hide/show">
+					</button>
+          <!-- add project button -->
+          <!-- hide/show button -->
+        </div>
+        <ul id="bottom-menu">
+          <li class="test">Work</li>
+          <li class="test">School</li>
+          <li class="test">Personal</li>
+        </ul>
+      </div>
+      <div id="task-container"></div>
+    </main>
   </body>
 </html>

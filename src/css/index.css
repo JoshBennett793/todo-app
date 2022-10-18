@@ -1,80 +1,195 @@
 :root {
-	--green: #387d72;
-	--light-green: #529f93;
-	--light-green-hover: #529f948f;
-	--header-border-radius: 3px;
+  --header-height: 70px;
+  --green: #387d72;
+  --light-green: #529f93;
+  --light-green-hover: #529f948f;
+  --navbar-bg-color: #fafafa;
+	--navbar-button-hover: #e6e6e6;
+  --header-border-radius: 3px;
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
+	font-weight: 300;
 }
 
 body {
-	position: relative;
+  position: relative;
 }
 
+/* ****** Header ****** */
+
 header {
-	background-color: var(--green);
-	height: 50px;
-	padding: 10px;
-	display: flex;
-	align-items: center;
+  background-color: var(--green);
+  height: var(--header-height);
+  padding: 20px;
+  display: flex;
+  align-items: center;
 }
 
 #header-left {
-	display: flex;
-	align-items: center;
-	margin-right: auto;
-	margin-left: 35px;
-	gap: 10px;
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 35px;
+  gap: 20px;
 }
 
-button.header-btn {
-	width: 30px;
-	height: 30px;
-	background: transparent;
-	border: none;
-	border-radius: var(--header-border-radius);
-	cursor: pointer;
+button {
+  background: transparent;
+  border: none;
+  border-radius: var(--header-border-radius);
+  cursor: pointer;
 }
 
 button.header-btn:hover {
-	background: var(--light-green);
-}
-
-img#navbar-toggle {
-	width: 30px;
+  background: var(--light-green);
 }
 
 #header-left input[type="text"] {
-	height: 28px;
-	background-color: var(--light-green);
-	padding: 4px;
-	padding-left: 28px;
-	margin-bottom: 3px;
-	margin-left: 8px;
-	outline: none;
-	border: none;
-	border-radius: var(--header-border-radius);
+  height: 34px;
+	font-size: 1.1rem;
+  background-color: var(--light-green);
+  padding: 4px;
+  padding-left: 34px;
+  margin-bottom: 3px;
+  margin-left: 8px;
+  outline: none;
+  border: none;
+  border-radius: var(--header-border-radius);
 }
 
 #header-left input[type="text"]:focus {
-	background-color: white;
-	width: 300px;
+  background-color: white;
+  width: 300px;
 }
 
 #header-left input[type="text"]:focus + svg {
-	stroke: black;
+  stroke: black;
 }
 
 #search-input-wrapper {
-	position: relative;
+  position: relative;
 }
 
 #search-input-wrapper > .feather-search {
+  position: absolute;
+  top: 4.5px;
+  left: 14px;
+}
+
+/* ****** Main ****** */
+
+#body-container {
+  display: flex;
+  position: relative;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ****** Navbar ****** */
+
+#project-navbar {
+  height: calc(100vh - var(--header-height));
+  width: 300px;
+	background: var(--navbar-bg-color);
+	padding: 50px 0 0 35px;
+	
+	
+  position: absolute;
+  left: 300;
+  top: 0;
+  font-size: 1.3rem;
+}
+
+
+#top-menu {
+	display: flex;
+  flex-direction: column;
+	
+	padding-left: 35px;
+  margin-bottom: 30px;
+  gap: 20px;
+	
+  position: relative;
+}
+
+#all-tasks-nav:before {
+	background-image: url(../assets/layers.svg);
+}
+
+#today-tasks-nav:before {
+	background-image: url(../assets/sunrise.svg);
+}
+
+#upcoming-tasks-nav:before {
+	background-image: url(../assets/clock.svg);
+}
+
+.top-menu-items:before {
+	content: "";
+	height: 24px;
+	width: 24px;
+	
 	position: absolute;
-	top: 3.5px;
-	left: 12px;
+	left: 0;
+}
+
+#top-menu li,
+#bottom-menu li {
+	cursor: pointer;
+}
+
+#projects-menu-header #projects {
+	font-weight: 500;
+}
+
+#projects-menu-header {
+	display: flex;
+	margin-bottom: 30px;
+	padding-right: 20px;
+	gap: 15px;
+}
+
+#projects {
+	margin-right: auto;
+}
+
+#project-navbar li:hover {
+	color: var(--light-green-hover);
+}
+
+#projects-menu-header button:hover {
+	background-color: var(--navbar-button-hover);
+}
+
+#bottom-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding-left: 35px;
+}
+
+#bottom-menu .test:before {
+	background-image: url(../assets/project-dots.svg);
+	content: "";
+	height: 24px;
+	width: 24px;
+
+	position: absolute;
+	left: 35px;
+}
+
+/* ****** Task Container ****** */
+
+#task-container {
+  flex-grow: 1;
+  height: calc(100vh - var(--header-height));
+  width: 300px;
+  overflow: auto;
 }

@@ -6,23 +6,27 @@ export default class Controller {
     this.view = view;
   }
 
-  createTodo = todo => {
-    pubsub.publish("createTodo", todo);
+  addToTasks = (task) => {
+    pubsub.publish("addTask", task);
   };
 
-  editTodo = (id, title, content, priority) => {
-    pubsub.publish("editTodo", id, title, content, priority);
+  renderTask = (task) => {
+    pubsub.publish("renderTask", task);
   };
 
-  removeTodo = id => {
-    pubsub.publish("removeTodo", id);
+  editTask = (id, title, content, priority) => {
+    pubsub.publish("editTask", id, title, content, priority);
   };
 
-  updateTodoIDs = () => {
-    pubsub.publish("updateTodoIDs");
+  removeTask = (id) => {
+    pubsub.publish("removeTask", id);
   };
 
-  createNote = note => {
+  updateTaskIDs = () => {
+    pubsub.publish("updateTaskIDs");
+  };
+
+  createNote = (note) => {
     pubsub.publish("createNote", note);
   };
 
@@ -30,19 +34,19 @@ export default class Controller {
     pubsub.publish("editNote", id, title, content);
   };
 
-	removeNote = id => {
-		pubsub.publish("removeNote", id);
-	}
+  removeNote = (id) => {
+    pubsub.publish("removeNote", id);
+  };
 
-	updateNoteIDs = () => {
-		pubsub.publish("updateNoteIDs");
-	}
+  updateNoteIDs = () => {
+    pubsub.publish("updateNoteIDs");
+  };
 
-	renderTaskModal = modal => {
-		pubsub.publish("renderTaskModal", modal);
-	}
+  renderTaskModal = (modal) => {
+    pubsub.publish("renderTaskModal", modal);
+  };
 
-	removeTaskModal = modal => {
-		pubsub.publish("removeTaskModal", modal);
-	}
+  removeTaskModal = (modal) => {
+    pubsub.publish("removeTaskModal", modal);
+  };
 }
