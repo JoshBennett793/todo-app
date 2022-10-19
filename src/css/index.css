@@ -4,7 +4,7 @@
   --light-green: #529f93;
   --light-green-hover: #529f948f;
   --navbar-bg-color: #fafafa;
-	--navbar-button-hover: #e6e6e6;
+  --navbar-button-hover: #e6e6e6;
   --header-border-radius: 3px;
 }
 
@@ -13,7 +13,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
-	font-weight: 300;
+  font-weight: 300;
 }
 
 body {
@@ -51,7 +51,7 @@ button.header-btn:hover {
 
 #header-left input[type="text"] {
   height: 34px;
-	font-size: 1.1rem;
+  font-size: 1.1rem;
   background-color: var(--light-green);
   padding: 4px;
   padding-left: 34px;
@@ -97,99 +97,106 @@ ul {
 #project-navbar {
   height: calc(100vh - var(--header-height));
   width: 300px;
-	background: var(--navbar-bg-color);
-	padding: 50px 0 0 35px;
-	
-	
-  position: absolute;
-  left: 300;
-  top: 0;
+  background: var(--navbar-bg-color);
+  padding: 50px 0 0 35px;
+
+	display: none !important;
   font-size: 1.3rem;
 }
 
-
 #top-menu {
-	display: flex;
+  display: flex;
   flex-direction: column;
-	
-	padding-left: 35px;
+
+  padding-left: 35px;
   margin-bottom: 30px;
   gap: 20px;
-	
+
   position: relative;
 }
 
 #all-tasks-nav:before {
-	background-image: url(../assets/layers.svg);
+  background-image: url(../assets/layers.svg);
 }
 
 #today-tasks-nav:before {
-	background-image: url(../assets/sunrise.svg);
+  background-image: url(../assets/sunrise.svg);
 }
 
 #upcoming-tasks-nav:before {
-	background-image: url(../assets/clock.svg);
+  background-image: url(../assets/clock.svg);
 }
 
 .top-menu-items:before {
-	content: "";
-	height: 24px;
-	width: 24px;
-	
-	position: absolute;
-	left: 0;
+  content: "";
+  height: 24px;
+  width: 24px;
+
+  position: absolute;
+  left: 0;
 }
 
 #top-menu li,
 #bottom-menu li {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 #projects-menu-header #projects {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 #projects-menu-header {
-	display: flex;
-	margin-bottom: 30px;
-	padding-right: 20px;
-	gap: 15px;
+  display: flex;
+  margin-bottom: 30px;
+  padding-right: 20px;
+  gap: 15px;
 }
 
 #projects {
-	margin-right: auto;
+  margin-right: auto;
 }
 
 #project-navbar li:hover {
-	color: var(--light-green-hover);
+  color: var(--light-green-hover);
 }
 
 #projects-menu-header button:hover {
-	background-color: var(--navbar-button-hover);
+  background-color: var(--navbar-button-hover);
 }
 
 #bottom-menu {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	padding-left: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 35px;
 }
 
 #bottom-menu .test:before {
-	background-image: url(../assets/project-dots.svg);
-	content: "";
-	height: 24px;
-	width: 24px;
+  background-image: url(../assets/project-dots.svg);
+  content: "";
+  height: 24px;
+  width: 24px;
 
-	position: absolute;
-	left: 35px;
+  position: absolute;
+  left: 35px;
 }
 
 /* ****** Task Container ****** */
 
 #task-container {
+  border: 2px solid red;
   flex-grow: 1;
+  position: absolute;
+  /* left: 300px; */
   height: calc(100vh - var(--header-height));
-  width: 300px;
+  /* width: calc(100% - 300px); */
+	width: 100%;
   overflow: auto;
+}
+
+
+@media only screen and (min-width: 600px) {
+	#project-navbar {
+		display: block !important;
+	}
 }

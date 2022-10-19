@@ -1,7 +1,7 @@
 export default class Model {
   constructor() {
     this.projects = [];
-    this.todos = [
+    this.tasks = [
       {
         id: 1,
         project: "TOP",
@@ -24,9 +24,9 @@ export default class Model {
     this.notes = [];
   }
 
-  addToTodos = (obj) => {
-    const todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+  addToTasks = (obj) => {
+    const task = {
+      id: this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1,
       project: obj.project,
       completed: false,
       title: obj.title,
@@ -34,23 +34,24 @@ export default class Model {
       dueDate: obj.dueDate,
       priority: obj.priority,
     };
-    this.todos.push(todo);
+    this.tasks.push(task);
+    console.log(this.tasks);
   };
 
-	editTodo = (id, title, content, priority) => {
-		const todo = this.todos.find((todo) => todo.id === id);
-		todo.title = title ? title : todo.title;
-		todo.content = content ? content : todo.content;
-		todo.priority = priority ? priority : todo.priority;
-	};
-
-  removeFromTodos = (id) => {
-    this.todos = this.todos.filter((todo) => todo.id != id);
+  editTask = (id, title, content, priority) => {
+    const task = this.tasks.find((task) => task.id === id);
+    task.title = title ? title : task.title;
+    task.content = content ? content : task.content;
+    task.priority = priority ? priority : task.priority;
   };
 
-  updateTodoIDs = () => {
-    for (let todo of this.todos) {
-      todo.id = todo.id - 1;
+  removeFromTasks = (id) => {
+    this.tasks = this.tasks.filter((task) => task.id != id);
+  };
+
+  updateTaskIDs = () => {
+    for (let task of this.tasks) {
+      task.id = task.id - 1;
     }
   };
 
@@ -63,19 +64,19 @@ export default class Model {
     this.notes.push(note);
   };
 
-	editNote = (id, title, content) => {
-		const note = this.notes.find(note => note.id === id);
-		note.title = title ? title : todo.title;
-		note.content = content ? content : todo.content;
-	}
+  editNote = (id, title, content) => {
+    const note = this.notes.find((note) => note.id === id);
+    note.title = title ? title : note.title;
+    note.content = content ? content : note.content;
+  };
 
-	removeFromNotes = (id) => {
-		this.notes = this.notes.filter(note => note.id != id);
-	}
+  removeFromNotes = (id) => {
+    this.notes = this.notes.filter((note) => note.id != id);
+  };
 
-	updateNoteIDs = () => {
-		for (let note of notes) {
-			note.id = note.id - 1;
-		}
-	}
+  updateNoteIDs = () => {
+    for (let note of notes) {
+      note.id = note.id - 1;
+    }
+  };
 }

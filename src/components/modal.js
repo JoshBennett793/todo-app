@@ -1,4 +1,5 @@
-import { HTMLElement } from "../index.js";
+import { HTMLElement } from "./view.js";
+import { controller } from "../index.js";
 import { format } from "date-fns";
 
 export class taskModal {
@@ -28,7 +29,7 @@ export class taskModal {
       "task-title-input"
     );
     taskTitleInput.placeholder = "e.g., Go grocery shopping";
-		taskTitleInput.required = true;
+    taskTitleInput.required = true;
     inputContainer.appendChild(taskTitleInput);
 
     const taskDescInput = new HTMLElement(
@@ -38,7 +39,7 @@ export class taskModal {
       "task-description-input"
     );
     taskDescInput.placeholder = "Description";
-		taskDescInput.required = true;
+    taskDescInput.required = true;
     taskDescInput.setAttribute("maxlength", "140");
     inputContainer.appendChild(taskDescInput);
 
@@ -131,7 +132,7 @@ export class taskModal {
 
     const addBtn = new HTMLElement(
       "button",
-      "submit",
+      "button",
       null,
       "add-btn",
       null,
@@ -164,6 +165,22 @@ export class taskModal {
           priorityFlagSVG.setAttribute("fill", "none");
       }
     };
+
+    cancelBtn.addEventListener("click", (e) => {
+      controller.removeTaskModal(e.target.closest("#task-modal-container"));
+    });
+
+    addBtn.addEventListener("click", (e) => {
+      const task = {
+        title: taskTitleInput.value,
+        content: taskDescInput.value,
+        dueDate: dueDate.value,
+        priority: priorityStatus.textContent,
+      };
+      controller.addToTasks(task);
+      controller.removeTaskModal(e.target.closest("#task-modal-container"));
+      controller.renderTask(task);
+    });
 
     return modalContainer;
   }
