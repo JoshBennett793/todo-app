@@ -1,26 +1,7 @@
 export default class Model {
   constructor() {
     this.projects = [];
-    this.tasks = [
-      {
-        id: 1,
-        project: "TOP",
-        completed: false,
-        title: "Project 1",
-        content: "Build Model",
-        dueDate: "10-13-2022",
-        priority: "high",
-      },
-      {
-        id: 2,
-        project: "TOP",
-        completed: false,
-        title: "Project 2",
-        content: "Build Controller",
-        dueDate: "10-13-2022",
-        priority: "high",
-      },
-    ];
+    this.tasks = [];
     this.notes = [];
   }
 
@@ -35,7 +16,6 @@ export default class Model {
       priority: obj.priority,
     };
     this.tasks.push(task);
-    console.log(this.tasks);
   };
 
   editTask = (id, title, content, priority) => {
@@ -79,4 +59,13 @@ export default class Model {
       note.id = note.id - 1;
     }
   };
+
+	toggleAddTaskBtn = () => {
+    const addTaskBtn = document.querySelector("#add-task-btn");
+    if (!addTaskBtn.disabled) {
+      addTaskBtn.disabled = true;
+    } else {
+      addTaskBtn.disabled = false;
+    }
+  }
 }

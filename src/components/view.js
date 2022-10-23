@@ -36,29 +36,24 @@ export class View {
   }
 
   renderTask(task) {
-    console.log(taskContainer);
     taskContainer.appendChild(new RenderedTask(task));
   }
 }
 
 const addTaskBtn = document.querySelector("#add-task-btn");
 
-addTaskBtn.addEventListener("click", () => {
+addTaskBtn.onclick = () => {
+	controller.toggleAddTaskBtn();
   const task = new taskModal();
   controller.renderTaskModal(task);
-});
+};
 
 const nav = document.querySelector("#project-navbar");
-const taskContainer = document.querySelector("#task-container");
 const showHideBtn = document.querySelector("#navbar-toggle");
 
 
-showHideBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-});
+// showHideBtn.addEventListener("click", (e) => {
 
-// TODO prevent user from adding multiple task modals
+//   e.preventDefault();
+// });
 
-// TODO add fieldset, legend, and aria labels to add task form
-
-// TODO navbar show/hide functionality doesn't work when using !important / maybe use a switch case instead?

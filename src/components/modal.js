@@ -39,7 +39,6 @@ export class taskModal {
       "task-description-input"
     );
     taskDescInput.placeholder = "Description";
-    taskDescInput.required = true;
     taskDescInput.setAttribute("maxlength", "140");
     inputContainer.appendChild(taskDescInput);
 
@@ -166,11 +165,14 @@ export class taskModal {
       }
     };
 
-    cancelBtn.addEventListener("click", (e) => {
+    cancelBtn.onclick = (e) => {
       controller.removeTaskModal(e.target.closest("#task-modal-container"));
-    });
+			controller.toggleAddTaskBtn();
+    };
 
-    addBtn.addEventListener("click", (e) => {
+		const addTaskBtn = document.querySelector("#add-task-btn"); 
+
+    addBtn.onclick = (e) => {
       const task = {
         title: taskTitleInput.value,
         content: taskDescInput.value,
@@ -180,7 +182,8 @@ export class taskModal {
       controller.addToTasks(task);
       controller.removeTaskModal(e.target.closest("#task-modal-container"));
       controller.renderTask(task);
-    });
+			controller.toggleAddTaskBtn();
+    };
 
     return modalContainer;
   }

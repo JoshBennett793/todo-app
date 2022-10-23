@@ -5,6 +5,7 @@ import Controller from "./components/controller.js";
 
 import "./css/index.css";
 import "./css/modal.css";
+import "./css/task.css";
 
 export const pubsub = new Pubsub();
 
@@ -21,3 +22,4 @@ pubsub.subscribe("removeNote", controller.model.removeNote);
 pubsub.subscribe("updateNoteIDs", controller.model.updateNoteIDs);
 pubsub.subscribe("renderTaskModal", controller.view.renderTaskModal);
 pubsub.subscribe("removeTaskModal", controller.view.removeTaskModal);
+pubsub.subscribe("toggleModalBtn", controller.model.toggleAddTaskBtn);

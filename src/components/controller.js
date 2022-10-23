@@ -49,4 +49,8 @@ export default class Controller {
   removeTaskModal = (modal) => {
     pubsub.publish("removeTaskModal", modal);
   };
+
+	toggleAddTaskBtn = () => {
+		pubsub.publish("toggleModalBtn")
+	}
 }
