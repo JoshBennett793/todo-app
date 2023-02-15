@@ -1,6 +1,6 @@
 import { taskModal } from "./modal.js";
 import { controller } from "../index.js";
-import { RenderedTask } from "./task.js";
+import { Task } from "./task.js";
 
 export class HTMLElement {
   constructor(tag, type, name, id, __class, text) {
@@ -26,34 +26,40 @@ export class HTMLElement {
 
 const taskContainer = document.querySelector("#task-container");
 
-export class View {
-  renderTaskModal(modal) {
+export default function View() {
+
+  const renderTaskModal = (modal) => {
     document.body.appendChild(modal);
   }
 
-  removeTaskModal(modal) {
+	const renderEditModal= (modal) => {
+		document.body.appendChild(modal);
+	}
+
+  const removeTaskModal = (modal) => {
     document.body.removeChild(modal);
   }
 
-  renderTask(task) {
-    taskContainer.appendChild(new RenderedTask(task));
+  const renderTask = (task) => {
+    taskContainer.appendChild(new Task(task));
   }
+	// TODO erase content of tasks on screen
+
+	return {
+		renderTaskModal,
+		renderEditModal,
+		removeTaskModal,
+		renderTask,
+	}
 }
 
 const addTaskBtn = document.querySelector("#add-task-btn");
 
 addTaskBtn.onclick = () => {
 	controller.toggleAddTaskBtn();
-  const task = new taskModal();
-  controller.renderTaskModal(task);
+  const modal = new taskModal();
+  controller.renderTaskModal(modal);
 };
 
 const nav = document.querySelector("#project-navbar");
 const showHideBtn = document.querySelector("#navbar-toggle");
-
-
-// showHideBtn.addEventListener("click", (e) => {
-
-//   e.preventDefault();
-// });
-

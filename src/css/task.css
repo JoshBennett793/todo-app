@@ -1,0 +1,103 @@
+:root {
+	--checkbox-priority-4: grey;
+	--checkbox-priority-3: blue;
+	--checkbox-priority-2: orange;
+	--checkbox-priority-1: #df0000;
+	--task-list-item-font-size: 1.3rem;
+	--task-desc-font-size: 1rem;
+	--due-date-font-size: 1.1rem;
+}
+
+.task-list-item {
+	width: max(100vw, 520px);
+	display: flex;
+  align-items: center;
+	text-align: center;
+	font-size: var(--task-list-item-font-size);
+}
+
+.task-list-item.complete {
+	text-decoration: line-through;
+	color: lightgrey;
+}
+
+.task-left-container {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.content-wrap {
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	margin: 22px auto 0 3rem;
+}
+
+.task-desc {
+	visibility: hidden;
+	width: 70ch;
+	font-size: var(--task-desc-font-size);
+	margin-top: 4px;
+}
+
+
+input[type="checkbox"] {
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	border-radius: 10px;
+  width: 20px;
+  height: 20px;
+	padding-right: 15px;
+	position: relative;
+	cursor: pointer;
+}
+
+input[type="checkbox"]:checked:before,
+input[type="checkbox"]:hover:before {
+	position: absolute;
+	content: "✔";
+	left: 3px;
+	top: 1px;
+	height: 24px;
+	width: 24px;
+}
+
+input[type="checkbox"]:hover:before {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.checkbox-priority-4 {
+	border: 2px solid var(--checkbox-priority-4);
+}
+
+.checkbox-priority-3 {
+	border: 2px solid var(--checkbox-priority-3);
+}
+
+.checkbox-priority-2 {
+	border: 2px solid var(--checkbox-priority-2);
+}
+
+.checkbox-priority-1 {
+	border: 2px solid var(--checkbox-priority-1);
+}
+
+.task-due-date {
+	font-size: var(--due-date-font-size);
+}
+
+.task-right-container * {
+	margin: 10px;
+}
+
+.details-btn {
+	/* margin-left: ; */
+	border: 1px solid var(--light-green);
+	color: var(--light-green);
+	height: 1.5rem;
+	width: 3.5rem;
+}
+

@@ -1,7 +1,9 @@
 import { HTMLElement } from "./view.js";
+import { controller } from "../index.js";
 import { parseISO } from "date-fns";
+import { EditTaskModal } from "./modal.js";
 
-export class RenderedTask {
+export class Task {
   constructor(obj) {
     const taskListItem = new HTMLElement(
       "li",
@@ -10,6 +12,7 @@ export class RenderedTask {
       null,
       "task-list-item"
     );
+		// taskListItem.setAttribute("data-id", ${obj.id})
 
 		const leftContainer = new HTMLElement(
       "div",
@@ -97,7 +100,7 @@ export class RenderedTask {
 
 		detailsBtn.onclick = () => {
 			taskDesc.style.visibility =
-        taskDesc.style.visibility === "hidden" ? "visible" : "hidden";
+        taskDesc.style.visibility === "visible" ? "hidden" : "visible";
 		}
 
 		if (!obj.dueDate) {
@@ -114,6 +117,11 @@ export class RenderedTask {
       "edit"
     );
     rightContainer.appendChild(editBtn);
+
+		editBtn.onclick = () => {
+			const editModal = new EditTaskModal();
+			controller.renderTaskModal(editModal);
+		}
 
 		const deleteBtn = new HTMLElement(
       "button",

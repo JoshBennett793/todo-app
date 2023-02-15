@@ -1,4 +1,4 @@
-import { pubsub } from "../index.js";
+import { pubsub } from '../index.js';
 
 export default class Controller {
   constructor(model, view) {
@@ -7,50 +7,58 @@ export default class Controller {
   }
 
   addToTasks = (task) => {
-    pubsub.publish("addTask", task);
+    pubsub.publish('addTask', task);
+  };
+
+  getTasks = () => {
+    pubsub.publish('getTasks');
   };
 
   renderTask = (task) => {
-    pubsub.publish("renderTask", task);
+    pubsub.publish('renderTask', task);
   };
-
+  
   editTask = (id, title, content, priority) => {
-    pubsub.publish("editTask", id, title, content, priority);
+    pubsub.publish('editTask', id, title, content, priority);
   };
 
   removeTask = (id) => {
-    pubsub.publish("removeTask", id);
+    pubsub.publish('removeTask', id);
   };
 
   updateTaskIDs = () => {
-    pubsub.publish("updateTaskIDs");
+    pubsub.publish('updateTaskIDs');
   };
 
   createNote = (note) => {
-    pubsub.publish("createNote", note);
+    pubsub.publish('createNote', note);
   };
 
   editNote = (id, title, content) => {
-    pubsub.publish("editNote", id, title, content);
+    pubsub.publish('editNote', id, title, content);
   };
 
   removeNote = (id) => {
-    pubsub.publish("removeNote", id);
+    pubsub.publish('removeNote', id);
   };
 
   updateNoteIDs = () => {
-    pubsub.publish("updateNoteIDs");
+    pubsub.publish('updateNoteIDs');
   };
 
   renderTaskModal = (modal) => {
-    pubsub.publish("renderTaskModal", modal);
+    pubsub.publish('renderTaskModal', modal);
+  };
+
+  renderEditModal = (modal) => {
+    pubsub.publish('renderEditModal', modal);
   };
 
   removeTaskModal = (modal) => {
-    pubsub.publish("removeTaskModal", modal);
+    pubsub.publish('removeTaskModal', modal);
   };
 
-	toggleAddTaskBtn = () => {
-		pubsub.publish("toggleModalBtn")
-	}
+  toggleAddTaskBtn = () => {
+    pubsub.publish('toggleModalBtn');
+  };
 }

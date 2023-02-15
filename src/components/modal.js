@@ -39,7 +39,7 @@ export class taskModal {
       "task-description-input"
     );
     taskDescInput.placeholder = "Description";
-    taskDescInput.setAttribute("maxlength", "140");
+    taskDescInput.setAttribute("maxlength", "60");
     inputContainer.appendChild(taskDescInput);
 
     const dueDateContainer = new HTMLElement(
@@ -167,10 +167,10 @@ export class taskModal {
 
     cancelBtn.onclick = (e) => {
       controller.removeTaskModal(e.target.closest("#task-modal-container"));
-			controller.toggleAddTaskBtn();
+      controller.toggleAddTaskBtn();
     };
 
-		const addTaskBtn = document.querySelector("#add-task-btn"); 
+    // const addTaskBtn = document.querySelector("#add-task-btn");
 
     addBtn.onclick = (e) => {
       const task = {
@@ -182,9 +182,16 @@ export class taskModal {
       controller.addToTasks(task);
       controller.removeTaskModal(e.target.closest("#task-modal-container"));
       controller.renderTask(task);
-			controller.toggleAddTaskBtn();
+      controller.toggleAddTaskBtn();
     };
 
     return modalContainer;
   }
+}
+
+export class EditTaskModal extends taskModal {
+	constructor (id, title, content, priority) {
+		super();
+		taskTitleInput.textContent = "working";
+	}
 }

@@ -82,8 +82,8 @@
         </svg>
       </button>
     </header>
-    <main id="body-container">
-      <div id="project-navbar" class="without-nav">
+    <div id="body-container">
+      <nav id="project-navbar" class="without-nav">
         <ul id="top-menu">
           <li id="all-tasks-nav" class="top-menu-items">All</li>
 
@@ -104,8 +104,28 @@
           <li class="test">School</li>
           <li class="test">Personal</li>
         </ul>
-      </div>
-      <div id="task-container"></div>
-    </main>
+			</nav>
+      <main id="task-container">
+				<div id="task-container-header">
+					<span class="project-name">All</span>
+					<span id="due-date">Due Date</span>
+				</div>
+				<li class="task-list-item">
+					<div class="task-left-container">
+						<input type="checkbox" name="complete" class="checkbox-priority-1">
+						<div class="content-wrap">
+							<span class="task-title">Example Task</span>
+							<span class="task-desc">This is a sample task description.</span>
+						</div>
+					</div>
+					<div class="task-right-container">
+						<span class="task-due-date">Due: Fri Dec 09 2022</span>
+						<button class="details-btn">details</button>
+						<button class="edit-btn">edit</button>
+						<button class="delete-btn">del</button>
+					</div>
+				</li>
+			</main>
+    </div>
   </body>
 </html>
