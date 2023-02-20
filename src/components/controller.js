@@ -1,64 +1,30 @@
-import { pubsub } from '../index.js';
+import { subscribe } from './pubsub';
+import model from './model';
+import { view } from './view';
 
-export default class Controller {
-  constructor(model, view) {
-    this.model = model;
-    this.view = view;
-  }
+const Model = model();
+const View = view();
 
-  addToTasks = (task) => {
-    pubsub.publish('addTask', task);
-  };
+export default function init() {
+  subscribe('toggleAddTaskBtn', () => {
+    Model.toggleAddTaskBtn();
+  });
 
-  getTasks = () => {
-    pubsub.publish('getTasks');
-  };
+  subscribe('removeTaskModal', (modal) => {
+    View.removeTaskModal(modal);
+  });
 
-  renderTask = (task) => {
-    pubsub.publish('renderTask', task);
-  };
-  
-  editTask = (id, title, content, priority) => {
-    pubsub.publish('editTask', id, title, content, priority);
-  };
+  subscribe('addToTasks', (task) => {
+    Model.addToTasks(task);
+  });
 
-  removeTask = (id) => {
-    pubsub.publish('removeTask', id);
-  };
+  subscribe('renderTasks', () => {
+    const tasks = Model.getTasks();
+    View.renderTasks(tasks);
+  });
 
-  updateTaskIDs = () => {
-    pubsub.publish('updateTaskIDs');
-  };
-
-  createNote = (note) => {
-    pubsub.publish('createNote', note);
-  };
-
-  editNote = (id, title, content) => {
-    pubsub.publish('editNote', id, title, content);
-  };
-
-  removeNote = (id) => {
-    pubsub.publish('removeNote', id);
-  };
-
-  updateNoteIDs = () => {
-    pubsub.publish('updateNoteIDs');
-  };
-
-  renderTaskModal = (modal) => {
-    pubsub.publish('renderTaskModal', modal);
-  };
-
-  renderEditModal = (modal) => {
-    pubsub.publish('renderEditModal', modal);
-  };
-
-  removeTaskModal = (modal) => {
-    pubsub.publish('removeTaskModal', modal);
-  };
-
-  toggleAddTaskBtn = () => {
-    pubsub.publish('toggleModalBtn');
-  };
+  subscribe('removeFromTasks', (id) => {
+    Model.removeFromTasks(id);
+    View.removeTaskFromDOM(id);
+  });
 }

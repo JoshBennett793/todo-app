@@ -1,3 +1,4 @@
 node_modules/
 src/todo.md
 .vscode/settings.json
+.eslintrc.json

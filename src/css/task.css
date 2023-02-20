@@ -101,3 +101,6 @@ input[type="checkbox"]:hover:before {
 	width: 3.5rem;
 }
 
+span#project-name {
+	margin-right: auto;
+}

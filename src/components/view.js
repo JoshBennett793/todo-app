@@ -1,6 +1,6 @@
-import { taskModal } from "./modal.js";
-import { controller } from "../index.js";
-import { Task } from "./task.js";
+import { publish } from './pubsub';
+import TaskModal from './modal';
+import Task from './task';
 
 export class HTMLElement {
   constructor(tag, type, name, id, __class, text) {
@@ -24,42 +24,69 @@ export class HTMLElement {
   }
 }
 
-const taskContainer = document.querySelector("#task-container");
+const taskContainer = document.querySelector('#task-container');
 
-export default function View() {
-
-  const renderTaskModal = (modal) => {
+export function view() {
+  const renderTaskModal = () => {
+    const modal = new TaskModal();
     document.body.appendChild(modal);
-  }
+  };
 
-	const renderEditModal= (modal) => {
-		document.body.appendChild(modal);
-	}
+  const renderEditModal = (modal) => {
+    document.body.appendChild(modal);
+  };
 
   const removeTaskModal = (modal) => {
     document.body.removeChild(modal);
-  }
+  };
 
-  const renderTask = (task) => {
-    taskContainer.appendChild(new Task(task));
-  }
-	// TODO erase content of tasks on screen
+  const renderTasks = (tasks) => {
+    tasks.forEach((task) => {
+      if (taskContainer.querySelector(`[data-id="${task.id}"]`)) {
+        return;
+      }
+      taskContainer.appendChild(new Task(task));
+    });
+  };
 
-	return {
-		renderTaskModal,
-		renderEditModal,
-		removeTaskModal,
-		renderTask,
-	}
+  const deleteBtnHandler = (id) => {
+    publish('removeFromTasks', id);
+  };
+
+  const removeTaskFromDOM = (id) => {
+    const taskToRemove = taskContainer.querySelector(`[data-id="${id}"]`);
+    taskContainer.removeChild(taskToRemove);
+  };
+
+  return {
+    renderTaskModal,
+    renderEditModal,
+    removeTaskModal,
+    renderTasks,
+    deleteBtnHandler,
+    removeTaskFromDOM,
+  };
 }
 
-const addTaskBtn = document.querySelector("#add-task-btn");
+const View = view();
+const addTaskBtn = document.querySelector('#add-task-btn');
 
 addTaskBtn.onclick = () => {
-	controller.toggleAddTaskBtn();
-  const modal = new taskModal();
-  controller.renderTaskModal(modal);
+  publish('toggleAddTaskBtn');
+  View.renderTaskModal();
 };
 
-const nav = document.querySelector("#project-navbar");
-const showHideBtn = document.querySelector("#navbar-toggle");
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('details-btn')) {
+    const parentNode = e.target.closest('.task-list-item');
+    const taskDesc = parentNode.getElementsByClassName('task-desc');
+    console.log(taskDesc[0]);
+    taskDesc[0].style.visibility =
+      taskDesc[0].style.visibility === 'visible' ? 'hidden' : 'visible';
+  } else if (e.target.classList.contains('edit-btn')) {
+
+	} else if (e.target.classList.contains('del-btn')) {
+    const taskID = e.target.closest('.task-list-item').dataset.id;
+    View.deleteBtnHandler(taskID);
+  }
+});

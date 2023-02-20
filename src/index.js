@@ -1,27 +1,7 @@
-import Pubsub from "./components/pubsub.js";
-import Model from "./components/model.js";
-import View from "./components/view.js";
-import Controller from "./components/controller.js";
+// eslint-disable-next-line import/no-cycle
+import init from './components/controller';
+import './css/index.css';
+import './css/modal.css';
+import './css/task.css';
 
-import "./css/index.css";
-import "./css/modal.css";
-import "./css/task.css";
-
-export const pubsub = new Pubsub();
-
-export const controller = new Controller(Model(), View());
-
-pubsub.subscribe("addTask", controller.model.addToTasks);
-pubsub.subscribe("getTasks", controller.model.getTasks);
-pubsub.subscribe("renderTask", controller.view.renderTask);
-pubsub.subscribe("editTask", controller.model.editTask);
-pubsub.subscribe("removeTask", controller.model.removeFromTasks);
-pubsub.subscribe("updateTaskIDs", controller.model.updateTaskIDs);
-pubsub.subscribe("createNote", controller.model.addToNotes);
-pubsub.subscribe("editNote", controller.model.editNote);
-pubsub.subscribe("removeNote", controller.model.removeNote);
-pubsub.subscribe("updateNoteIDs", controller.model.updateNoteIDs);
-pubsub.subscribe("renderTaskModal", controller.view.renderTaskModal);
-pubsub.subscribe("renderEditModal", controller.view.renderEditModal);
-pubsub.subscribe("removeTaskModal", controller.view.removeTaskModal);
-pubsub.subscribe("toggleModalBtn", controller.model.toggleAddTaskBtn);
+document.addEventListener('DOMContentLoaded', () => init());

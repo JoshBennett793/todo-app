@@ -1,7 +1,14 @@
-export default function Model() {
-  const projects = [];
-  const tasks = [];
-  const notes = [];
+const projects = [];
+let tasks = [];
+let notes = [];
+
+export default function model() {
+  const toggleAddTaskBtn = () => {
+    const addTaskBtn = document.querySelector('#add-task-btn');
+    console.log(addTaskBtn);
+    addTaskBtn.style.pointerEvents =
+      addTaskBtn.style.pointerEvents === 'none' ? 'auto' : 'none';
+  };
 
   const addToTasks = (obj) => {
     const task = {
@@ -14,8 +21,9 @@ export default function Model() {
       priority: obj.priority,
     };
     tasks.push(task);
-    console.log(tasks);
   };
+
+  const getTasks = () => tasks;
 
   const editTask = (id, title, content, priority) => {
     const task = this.tasks.find((task) => task.id === id);
@@ -25,13 +33,12 @@ export default function Model() {
   };
 
   const removeFromTasks = (id) => {
-    tasks = tasks.filter((task) => task.id != id);
+    const parsedID = parseInt(id);
+    tasks = tasks.filter((task) => task.id !== parsedID);
   };
 
   const updateTaskIDs = () => {
-    for (let task of tasks) {
-      task.id = task.id - 1;
-    }
+    // reassign every obj id in task array
   };
 
   const addToNotes = (obj) => {
@@ -50,26 +57,19 @@ export default function Model() {
   };
 
   const removeFromNotes = (id) => {
-    notes = notes.filter((note) => note.id != id);
+    notes = notes.filter((note) => note.id !== id);
   };
 
   const updateNoteIDs = () => {
-    for (let note of notes) {
-      note.id = note.id - 1;
-    }
-  };
-
-  const toggleAddTaskBtn = () => {
-    const addTaskBtn = document.querySelector('#add-task-btn');
-    if (!addTaskBtn.disabled) {
-      addTaskBtn.disabled = true;
-    } else {
-      addTaskBtn.disabled = false;
+    for (const note of notes) {
+      note.id -= 1;
     }
   };
 
   return {
+    toggleAddTaskBtn,
     addToTasks,
+    getTasks,
     editTask,
     removeFromTasks,
     updateTaskIDs,
@@ -77,6 +77,5 @@ export default function Model() {
     editNote,
     removeFromNotes,
     updateNoteIDs,
-    toggleAddTaskBtn,
   };
 }
